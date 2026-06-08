@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "stallions": [
+    {
+      "name": "plan-architect",
+      "type": "agent",
+      "file": "agents/plan-architect.md",
+      "installTarget": "~/.claude/agents/plan-architect.md",
+      "model": "opus",
+      "description": "Planning specialist. Asks probing questions, explores the codebase, and generates phased implementation plans with [PARALLEL]/[SEQUENTIAL] tags and a ready-to-use TODO.md.",
+      "triggerOn": [
+        "new feature request",
+        "refactor or restructuring",
+        "UI/UX change with broader implications",
+        "vague feature request needing clarification"
+      ],
+      "source": "custom"
+    },
+    {
+      "name": "plan-implementer",
+      "type": "agent",
+      "file": "agents/plan-implementer.md",
+      "installTarget": "~/.claude/agents/plan-implementer.md",
+      "model": "inherit",
+      "description": "Execution specialist. Reads a plan, proposes solo-vs-agent-team approach, tracks TODO checkboxes, and coordinates parallel work across agent teams.",
+      "triggerOn": [
+        "user has a plan ready and wants to implement it",
+        "plan has [PARALLEL] tasks that could run concurrently",
+        "continuing implementation from a previous phase"
+      ],
+      "source": "custom"
+    }
+  ],
+  "skills": [
+    {
+      "name": "ui-design",
+      "type": "skill",
+      "folder": "skills/ui-design",
+      "installTarget": "~/.claude/skills/ui-design",
+      "description": "Builds frontend UI in a specific personal design language — intentional, anti-template, semantically grounded. Interrogates product domain, user type, and mode before generating any code.",
+      "triggerOn": [
+        "building web components, pages, marketing sites, dashboards, or app screens",
+        "user asks for UI that doesn't look AI-generated or vibe-coded"
+      ],
+      "source": "custom"
+    },
+    {
+      "name": "shadcn",
+      "type": "skill",
+      "folder": "skills/shadcn",
+      "installTarget": "~/.agents/skills/shadcn",
+      "description": "Manages shadcn/ui components: adding, searching, fixing, debugging, styling, and composing. Provides project context, component docs, and usage examples.",
+      "triggerOn": [
+        "working with shadcn/ui, component registries, or presets",
+        "project has a components.json file",
+        "shadcn init or component-level work"
+      ],
+      "source": "github:shadcn/ui"
+    },
+    {
+      "name": "tdd",
+      "type": "skill",
+      "folder": "skills/tdd",
+      "installTarget": "~/.agents/skills/tdd",
+      "description": "Test-driven development workflow: deep-module design, mocking strategy, interface design before implementation, refactoring patterns.",
+      "triggerOn": [
+        "writing tests for a new module",
+        "setting up a TDD workflow",
+        "refactoring with test coverage as a constraint"
+      ],
+      "source": "github:mattpocock/skills"
+    },
+    {
+      "name": "to-issues",
+      "type": "skill",
+      "folder": "skills/to-issues",
+      "installTarget": "~/.agents/skills/to-issues",
+      "description": "Converts a conversation or plan into discrete GitHub issues and publishes them to the project issue tracker.",
+      "triggerOn": [
+        "user wants to create GitHub issues from the current context",
+        "breaking down a plan into trackable work items"
+      ],
+      "source": "github:mattpocock/skills"
+    },
+    {
+      "name": "to-prd",
+      "type": "skill",
+      "folder": "skills/to-prd",
+      "installTarget": "~/.agents/skills/to-prd",
+      "description": "Synthesizes a structured PRD from the current conversation context — problem statement, solution, user stories, implementation decisions, testing decisions — and publishes it to the issue tracker.",
+      "triggerOn": [
+        "user wants to create a PRD from the current conversation",
+        "formalizing a feature discussion into a product document"
+      ],
+      "source": "github:mattpocock/skills"
+    },
+    {
+      "name": "triage",
+      "type": "skill",
+      "folder": "skills/triage",
+      "installTarget": "~/.agents/skills/triage",
+      "description": "Triages incoming issues: labels, prioritizes, routes, and applies triage vocabulary to keep the backlog clean.",
+      "triggerOn": [
+        "triaging a GitHub issue",
+        "labeling or routing new issues",
+        "running a triage session on the backlog"
+      ],
+      "source": "github:mattpocock/skills"
+    },
+    {
+      "name": "web-design-guidelines",
+      "type": "skill",
+      "folder": "skills/web-design-guidelines",
+      "installTarget": "~/.agents/skills/web-design-guidelines",
+      "description": "Reviews UI code against the latest Web Interface Guidelines. Fetches live rules from the Vercel source URL, then audits specified files for compliance, accessibility, and UX best practices.",
+      "triggerOn": [
+        "reviewing UI code for quality or accessibility",
+        "auditing design against best practices",
+        "user asks to review my UI or check my site"
+      ],
+      "source": "github:vercel-labs/agent-skills"
+    }
+  ]
+}

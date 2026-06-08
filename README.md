@@ -25,27 +25,31 @@ Workflow skills for Claude Code. Drop these into `~/.agents/skills/` to install,
 | `to-issues` | [mattpocock/skills](https://github.com/mattpocock/skills) | Converts conversation context into GitHub issues. |
 | `to-prd` | [mattpocock/skills](https://github.com/mattpocock/skills) | Synthesizes a PRD from conversation context and publishes to issue tracker. |
 | `triage` | [mattpocock/skills](https://github.com/mattpocock/skills) | Triages incoming issues — labels, prioritizes, routes. |
+| `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Reviews UI code against the latest Web Interface Guidelines — accessibility, UX, best practices. |
 
 ## Install
 
 ```bash
-# Agents
-cp agents/plan-architect.md ~/.claude/agents/
-cp agents/plan-implementer.md ~/.claude/agents/
+# Install everything
+bash install.sh all
 
-# Skills (ui-design lives in ~/.claude/skills/)
-cp -r skills/ui-design ~/.claude/skills/
+# Or install one item
+bash install.sh plan-architect
+bash install.sh ui-design
 
-# Third-party skills live in ~/.agents/skills/
-mkdir -p ~/.agents/skills
-cp -r skills/shadcn ~/.agents/skills/
-cp -r skills/tdd ~/.agents/skills/
-cp -r skills/to-issues ~/.agents/skills/
-cp -r skills/to-prd ~/.agents/skills/
-cp -r skills/triage ~/.agents/skills/
+# List what's available
+bash install.sh --list
 ```
+
+`install.sh` is idempotent and handles the correct destination for each type automatically.
+
+## For agents
+
+Read `AGENTS.md` for a complete orientation: trigger conditions, install targets, and key paths.  
+Read `catalog.json` for a machine-readable manifest of all stallions and skills.
 
 ## Attribution
 
 `shadcn` skill vendored from [shadcn/ui](https://github.com/shadcn/ui).  
-`tdd`, `to-issues`, `to-prd`, `triage` skills vendored from [mattpocock/skills](https://github.com/mattpocock/skills).
+`tdd`, `to-issues`, `to-prd`, `triage` skills vendored from [mattpocock/skills](https://github.com/mattpocock/skills).  
+`web-design-guidelines` skill vendored from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills).
