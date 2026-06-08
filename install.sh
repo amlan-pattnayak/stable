@@ -9,6 +9,20 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# ── preflight ─────────────────────────────────────────────────────────────────
+preflight_check() {
+  printf "Checking Claude Code installation... "
+  if command -v claude &>/dev/null; then
+    echo "✓"
+  else
+    echo "✗"
+    echo ""
+    echo "Error: 'claude' CLI not found on PATH." >&2
+    echo "Install Claude Code first: https://claude.ai/code" >&2
+    exit 1
+  fi
+}
+
 AGENTS_SRC="$SCRIPT_DIR/agents"
 SKILLS_SRC="$SCRIPT_DIR/skills"
 
@@ -68,7 +82,8 @@ install_all() {
     IFS='|' read -r name _ _ _ _ <<< "$entry"
     install_item "$name"
   done
-  echo "Done."
+  echo ""
+  echo "Done. Start a new Claude Code session to activate."
 }
 
 # ── main ───────────────────────────────────────────────────────────────────────
@@ -82,6 +97,6 @@ fi
 
 case "$1" in
   --list)  list_items ;;
-  all)     install_all ;;
-  *)       install_item "$1" ;;
+  all)     preflight_check; install_all ;;
+  *)       preflight_check; install_item "$1" ;;
 esac
